@@ -1,0 +1,44 @@
+versions:
+  pipx_installer: "1.6.0"   # renovate: datasource=github-releases depName=pypa/pipx
+
+pipx_packages:
+  - poetry
+
+brew_packages:
+  - starship
+  - age
+  - atuin
+  - bat
+  - cue
+  - eza
+  - fluxcd/tap/flux
+  - gh
+  - go-task
+  - hadolint
+  - helm
+  - hugo
+  - jump
+  - k9s
+  - kubernetes-cli
+  - krr
+  - kustomize
+  - krew
+  - magic-wormhole
+  - pre-commit
+  - restic
+  - sops
+  - sqlite
+  - talhelper
+  - fisher
+
+winget_packages:
+  - eza-community.eza
+  - Starship.Starship
+
+kubectl_krew_plugins:
+  - explore
+
+fisher_plugins:
+  - jorgebucaran/fisher
+  - jorgebucaran/nvm.fish
+  - z11i/github-copilot-cli.fish

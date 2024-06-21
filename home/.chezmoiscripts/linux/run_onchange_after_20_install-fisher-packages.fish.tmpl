@@ -1,0 +1,14 @@
+{{- if .is_desktop -}}
+#!/usr/bin/env fish
+
+# Install homebrew
+{{ if not (stat (joinPath .chezmoi.homeDir ".config/fish/functions/fisher.fish")) }}
+  echo "🎣  Installing Fisher"
+  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+{{ end }}
+
+
+echo "🪝  Installing/updating fisher plugins: {{ .fisher_plugins | join " " }}"
+fisher install {{ .fisher_plugins | join " " }}
+
+{{ end -}}

@@ -1,0 +1,4 @@
+if test -d (python3 -m site --user-base)"/bin"
+    contains (python3 -m site --user-base)/bin $fish_user_paths; or set -Ua fish_user_paths (python3 -m site --user-base)/bin
+end
+

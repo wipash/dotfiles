@@ -1,0 +1,16 @@
+{{- if .is_desktop -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Install homebrew
+{{ if not (stat "/home/linuxbrew/.linuxbrew/bin/brew") }}
+  echo "🍺  Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ end }}
+
+
+echo "👊  Installing/updating brew packages: {{ .brew_packages | join " " }}"
+brew install {{ .brew_packages | join " " }}
+
+{{ end -}}

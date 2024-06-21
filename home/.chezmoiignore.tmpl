@@ -1,0 +1,33 @@
+README.md
+
+{{ if .is_server }}
+.config/git
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.config
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+**/*.sh
+
+.local/share/bash-completion/**
+#.local/bin/**
+.bash_history
+.bashrc
+.profile
+.zshenv
+.hushlogin
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+**/*.bat
+**/*.ps1
+Documents
+AppData
+
+.config/winget
+
+.gitconfig
+.npmrc
+{{ end }}

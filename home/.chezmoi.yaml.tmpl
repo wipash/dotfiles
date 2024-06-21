@@ -1,0 +1,54 @@
+# chezmoi:template:missing-key=invalid
+config_info: |
+  {{- $interactive := stdinIsATTY -}}
+  {{- $ephemeral := false -}}
+  {{- $name := promptStringOnce . "name" "Name"  -}}
+  {{- $email := promptStringOnce . "email" "Email address" -}}
+
+  {{- $is_wsl := false -}}
+  {{- if .chezmoi.kernel -}}
+  {{-   if hasKey .chezmoi.kernel "osrelease" -}}
+  {{-     $is_wsl = (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+  {{-   end -}}
+  {{- end -}}
+
+  {{- $is_desktop := or ($is_wsl) (eq .chezmoi.os "windows") (eq (env "IS_DESKTOP") "true") -}}
+
+  {{- if or (env "CODESPACES") (env "GITPOD_WORKSPACE_ID") -}}
+  {{-   $ephemeral = true -}}
+  {{-   $is_desktop = true -}}
+  {{-   $name = coalesce (env "GITPOD_GIT_USER_NAME") .name -}}
+  {{-   $email = coalesce (env "GITPOD_GIT_USER_EMAIL") .email -}}
+  {{- end -}}
+
+  {{- $is_server := not $is_desktop -}}
+  {{- $workingTree := .chezmoi.workingTree -}}
+  {{- $username := .chezmoi.username -}}
+
+  {{- $script_ext := "sh" -}}
+  {{- if eq .chezmoi.os "windows" -}}
+  {{-   $script_ext = "bat" -}}
+  {{-   $workingTree = printf "%s%s" .chezmoi.homeDir "/AppData/Local/chezmoi" -}}
+  {{-   $username = env "USERNAME" -}}
+  {{- end -}}
+
+  {{ "" }}
+  Generated for user={{ $username }}, hostname={{ .chezmoi.hostname }}
+
+interpreters:
+  ps1:
+    # Prefer PowerShell Core over PowerShell Desktop
+    # https://github.com/PowerShell/PowerShell/issues/8635#issuecomment-454028787
+    command: '{{ if env "CHEZMOI_PS1_COMMAND" }}{{ env "CHEZMOI_PS1_COMMAND" }}{{ else if lookPath "pwsh.exe" }}pwsh.exe{{ else }}powershell.exe{{ end }}'
+    args: ["-NoLogo", "-NoProfile"]
+
+data:
+  is_wsl: {{ $is_wsl }}
+  is_server: {{ $is_server }}
+  is_desktop: {{ $is_desktop  }}
+{{- if eq .chezmoi.os "linux" }}
+  uname:
+    machine: '{{ output "uname" "-m" | trim }}'
+{{- end }}
+  email: {{ $email }}
+  name: {{ $name }}

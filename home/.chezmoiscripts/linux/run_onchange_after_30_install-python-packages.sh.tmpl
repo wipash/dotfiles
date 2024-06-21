@@ -1,0 +1,20 @@
+{{- if and (lookPath "python3") (.is_desktop) -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Install pipx
+{{ if not (stat (joinPath .chezmoi.homeDir ".local/bin/pipx")) }}
+  echo "Installing pipx"
+  curl -Ls https://github.com/pypa/pipx/releases/download/{{ .versions.pipx_installer }}/pipx.pyz -o pipx.pyz && python3 pipx.pyz install pipx --force
+{{ end }}
+
+
+echo "Installing/updating pipx packages: {{ .pipx_packages | join " " }}"
+{{ range .pipx_packages -}}
+  echo Installing pipx package '{{ . }}'
+  .local/bin/pipx install {{ . }}
+{{ end }}
+.local/bin/pipx upgrade-all
+
+{{ end -}}
