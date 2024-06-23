@@ -1,11 +1,12 @@
-
-
 # Configure Jump
 status --is-interactive; and source (jump shell fish | psub)
 
 set -g theme_display_vagrant no
 set -g theme_display_ruby no
 set -x VIRTUAL_ENV_DISABLE_PROMPT 1
+
+# Disable welcome message
+set fish_greeting
 
 # Fish syntax highlighting
 set -g fish_color_autosuggestion '555'  'brblack'
