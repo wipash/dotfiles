@@ -4,6 +4,9 @@ versions:
 pipx_packages:
   - poetry
 
+brew_kegs:
+  - robusta-dev/homebrew-krr
+
 brew_packages:
   - starship
   - age
