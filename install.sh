@@ -9,7 +9,11 @@ read -n 1 -r -s -p $'    Press any key to continue or Ctrl+C to abort...\n\n'
 
 # Install Homebrew
 command -v brew >/dev/null 2>&1 || \
-  (echo '🍺  Installing Homebrew' && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+  (echo '🍺  Installing Homebrew' && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
+  (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/sean/.bashrc && \
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
+  sudo apt-get install -y build-essential && \
+  brew install gcc)
 
 command -v fish >/dev/null 2>&1 || \
   (echo '🐟  Installing fish' && brew install fish)
