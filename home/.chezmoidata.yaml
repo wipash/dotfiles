@@ -33,6 +33,7 @@ brew_packages:
   - sqlite
   - talhelper
   - fisher
+  - llm
 
 winget_packages:
   - eza-community.eza
