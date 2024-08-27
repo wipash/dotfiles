@@ -28,23 +28,25 @@ function gcm
         set -l prompt_text "
 Below is a diff of all changes, coming from the command:
 \`\`\`
-git diff --cached
+git diff -U1000 --cached
 \`\`\`
-Please generate a concise, one-line commit message for these changes.
+Please generate a concise, one-line commit message that summarises all the changes, followed by an empty line,
+then a more detailed description of the changes contained within this commit. Follow the Conventional
+Commits style. Don't wrap your response in backticks or any other characters.
 
 ----------
 "
         set -l diff_output
 
         if contains -- -a $argv
-            set diff_output (git diff HEAD)
+            set diff_output (git diff -U1000 HEAD)
         else
-            set diff_output (git diff --cached)
+            set diff_output (git diff -U1000 --cached)
         end
 
         set prompt_text "$prompt_text$diff_output"
 
-        echo $prompt_text | llm
+        echo $prompt_text | llm | string collect
 
     end
 
@@ -61,14 +63,14 @@ Please generate a concise, one-line commit message for these changes.
 
     while true
         echo -e "Proposed commit message:\n"
-        echo $commit_message
+        echo -e "$commit_message"
         echo -e ""
 
         set choice (read_input "Do you want to (c)ancel, (a)ccept, (e)dit or (r)egenerate? ")
 
         switch $choice
             case 'a' 'A' ''
-                if git commit $argv -m "$commit_message"
+                if echo "$commit_message" | git commit $argv --file -
                     echo "Changes committed successfully!"
                     return 0
                 else
@@ -76,13 +78,17 @@ Please generate a concise, one-line commit message for these changes.
                     return 1
                 end
             case 'e' 'E'
-                set commit_message (read_input "Enter your commit message: ")
-                if [ -n "$commit_message" ] && git commit $argv -m "$commit_message"
-                    echo "Changes committed successfully with your message!"
-                    return 0
+                set commit_message (read -P "Enter your commit message: " -m)
+                if [ -n "$commit_message" ]
+                    if echo "$commit_message" | git commit $argv --file -
+                        echo "Changes committed successfully with your message!"
+                        return 0
+                    else
+                        echo "Commit failed. Please check your message and try again."
+                        return 1
+                    end
                 else
-                    echo "Commit failed. Please check your message and try again."
-                    return 1
+                    echo "Empty commit message. Please try again."
                 end
             case 'r' 'R'
                 echo "Regenerating commit message..."
