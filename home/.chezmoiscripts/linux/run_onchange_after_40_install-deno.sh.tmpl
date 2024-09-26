@@ -1,0 +1,13 @@
+{{- if .is_desktop -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Install deno
+{{ if not (stat (joinPath .chezmoi.homeDir ".deno/bin/deno")) }}
+  echo "Installing deno"
+  curl -fsSL https://deno.land/install.sh | sh
+  deno completions fish > ~/.config/fish/completions/deno.fish
+{{ end }}
+
+{{ end -}}
