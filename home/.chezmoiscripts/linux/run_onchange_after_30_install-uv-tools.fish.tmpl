@@ -1,7 +1,5 @@
 {{- if and (lookPath "uv") (.is_desktop) -}}
-#!/usr/bin/env bash
-
-set -euo pipefail
+#!/usr/bin/env fish
 
 echo "Installing/updating uv tools: {{ .uv_tools | join " " }}"
 {{ range .uv_tools -}}
