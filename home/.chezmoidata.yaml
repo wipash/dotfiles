@@ -33,6 +33,9 @@ brew_packages:
   - llm
   - uv
 
+uv_tools:
+  - --python python3.12 aider-chat@latest
+
 winget_packages:
   - eza-community.eza
   - Starship.Starship

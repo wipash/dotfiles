@@ -1,0 +1,17 @@
+{{- if and (lookPath "uv") (.is_desktop) -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing/updating uv tools: {{ .uv_tools | join " " }}"
+{{ range .uv_tools -}}
+  echo Installing uv tool '{{ . }}'
+  {{- if contains "@" . }}
+  uv tool install {{ . }}
+  {{- else }}
+  uv tool install {{ . }}@latest
+  {{- end }}
+{{ end }}
+uv tool upgrade --all
+
+{{ end -}}
