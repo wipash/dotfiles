@@ -1,8 +1,5 @@
-versions:
-  pipx_installer: "1.6.0"   # renovate: datasource=github-releases depName=pypa/pipx
-
-pipx_packages:
-  - poetry
+# versions:
+#   pipx_installer: "1.6.0"   # renovate: datasource=github-releases depName=pypa/pipx
 
 brew_kegs:
   - robusta-dev/homebrew-krr
@@ -34,6 +31,7 @@ brew_packages:
   - talhelper
   - fisher
   - llm
+  - uv
 
 winget_packages:
   - eza-community.eza
