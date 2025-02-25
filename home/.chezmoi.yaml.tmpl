@@ -4,6 +4,8 @@ config_info: |
   {{- $ephemeral := false -}}
   {{- $name := promptStringOnce . "name" "Name"  -}}
   {{- $email := promptStringOnce . "email" "Email address" -}}
+  {{- $opsubdomain := promptStringOnce . "opsubdomain" "1Password subdomain" -}}
+  {{- $opemail := promptStringOnce . "opemail" "1Password email" -}}
 
   {{- $is_wsl := false -}}
   {{- if .chezmoi.kernel -}}
@@ -52,8 +54,9 @@ data:
 {{- end }}
   email: {{ $email }}
   name: {{ $name }}
+  opsubdomain: {{ $opsubdomain }}
+  opemail: {{ $opemail }}
 
 edit:
   command: code
   args: ["--wait"]
-  
