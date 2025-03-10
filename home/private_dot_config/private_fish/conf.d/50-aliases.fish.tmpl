@@ -16,3 +16,8 @@ function ssh
   /mnt/c/Windows/System32/OpenSSH/ssh.exe $argv
 end
 
+{{ if and (.is_desktop) (.is_wsl) -}}
+function op
+  /mnt/c/users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe $argv
+end
+{{ end -}}
