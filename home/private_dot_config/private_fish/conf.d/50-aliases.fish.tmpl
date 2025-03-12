@@ -1,23 +1,25 @@
 
-if test -f /mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code
-  alias 'code'='/mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
-else if test -f /mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code
-  alias 'code'='/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code'
-end
+contains ~/bin $fish_user_paths; or set -Ua fish_user_paths ~/bin
 
-alias 'explorer'='/mnt/c/Windows/explorer.exe'
+# if test -f /mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code
+#   alias 'code'='/mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
+# else if test -f /mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code
+#   alias 'code'='/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code'
+# end
+
+# alias 'explorer'='/mnt/c/Windows/explorer.exe'
 
 
-function ssh-add
-  /mnt/c/Windows/System32/OpenSSH/ssh-add.exe $argv
-end
+# function ssh-add
+#   /mnt/c/Windows/System32/OpenSSH/ssh-add.exe $argv
+# end
 
-function ssh
-  /mnt/c/Windows/System32/OpenSSH/ssh.exe $argv
-end
+# function ssh
+#   /mnt/c/Windows/System32/OpenSSH/ssh.exe $argv
+# end
 
-{{ if and (.is_desktop) (.is_wsl) -}}
-function op
-  /mnt/c/users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe $argv
-end
-{{ end -}}
+# {{ if and (.is_desktop) (.is_wsl) -}}
+# function op
+#   /mnt/c/users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe $argv
+# end
+# {{ end -}}
