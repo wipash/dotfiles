@@ -53,7 +53,10 @@ winget_packages:
   - Obsidian.Obsidian
   - Mirantis.Lens
   - FluxCD.Flux
-
+  - Discord.Discord
+  - Kubernetes.kubectl
+  - Anysphere.Cursor
+  - Volta.Volta
 
 kubectl_krew_plugins:
   - explore
