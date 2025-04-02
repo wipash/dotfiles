@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.os "linux" }}
 ##########################################################
 # Sample .aider.conf.yml
 # This file lists *all* the valid configuration entries.
@@ -396,3 +397,4 @@ analytics-disable: true
 
 ## Specify the input device name for voice recording
 #voice-input-device: xxx
+{{- end }}

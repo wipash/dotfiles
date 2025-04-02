@@ -39,6 +39,21 @@ uv_tools:
 winget_packages:
   - eza-community.eza
   - Starship.Starship
+  - Fork.Fork
+  - Git.Git
+  - Microsoft.VisualStudioCode
+  - Microsoft.WindowsTerminal
+  - Microsoft.PowerToys
+  - SlackTechnologies.Slack
+  - Microsoft.AzureCLI
+  - Microsoft.Azure.StorageExplorer
+  - astral-sh.uv
+  - AgileBits.1Password.CLI
+  - 9NKSQGP7F2NH # WhatsApp
+  - Obsidian.Obsidian
+  - Mirantis.Lens
+  - FluxCD.Flux
+
 
 kubectl_krew_plugins:
   - explore
@@ -47,3 +62,8 @@ fisher_plugins:
   - jorgebucaran/fisher
   - jorgebucaran/nvm.fish
   - z11i/github-copilot-cli.fish
+
+kubeconfig_onepassword_sources:
+  - path: op://Homelab/Kubeconfig/notesPlain
+  - path: op://K8s - akl-flux-cluster/kubeconfig/notesPlain
+  # Add more as needed

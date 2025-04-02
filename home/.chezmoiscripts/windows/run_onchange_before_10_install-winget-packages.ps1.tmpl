@@ -1,0 +1,7 @@
+$packages = {{- range .winget_packages }} "{{ . }}"{{ if ne . (last $.winget_packages) }},{{ end }}{{ end }}
+Write-Output "Installing packages: $packages"
+
+foreach ($package in $packages) {
+    Write-Output "Installing $package"
+    winget install --id $package --exact --silent --accept-source-agreements --accept-package-agreements
+}
