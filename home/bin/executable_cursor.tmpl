@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+{{ if stat "/mnt/c/Users/sean/AppData/Local/Programs/cursor/resources/app/bin/cursor" }}
+/mnt/c/Users/sean/AppData/Local/Programs/cursor/resources/app/bin/cursor "$@"
+{{ else if stat "/mnt/c/Program Files/Cursor/resources/app/bin/cursor" }}
+/mnt/c/Program\ Files/Cursor/resources/app/bin/cursor "$@"
+{{ else }}
+echo "Cursor not found"
+{{ end }}
