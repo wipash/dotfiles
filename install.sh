@@ -12,7 +12,7 @@ command -v brew >/dev/null 2>&1 || \
   (echo '🍺  Installing Homebrew' && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
   (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/sean/.bashrc && \
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && \
-  sudo apt-get update && sudo apt-get install -y build-essential && \
+  sudo apt-get update && sudo apt-get install -y build-essential procps curl file git && \
   brew install gcc)
 
 command -v fish >/dev/null 2>&1 || \

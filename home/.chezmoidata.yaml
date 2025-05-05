@@ -5,6 +5,7 @@ brew_kegs:
   - robusta-dev/homebrew-krr
 
 brew_packages:
+  - gcc
   - starship
   - age
   - atuin
@@ -32,6 +33,7 @@ brew_packages:
   - fisher
   - llm
   - uv
+  - volta
 
 uv_tools:
   - --python python3.12 aider-chat@latest

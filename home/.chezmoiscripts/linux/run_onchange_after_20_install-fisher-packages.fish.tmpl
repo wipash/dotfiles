@@ -11,4 +11,6 @@
 echo "🪝  Installing/updating fisher plugins: {{ .fisher_plugins | join " " }}"
 fisher install {{ .fisher_plugins | join " " }}
 
+fisher remove jorgebucaran/nvm.fish
+
 {{ end -}}

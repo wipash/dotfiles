@@ -1,0 +1,6 @@
+{{- if and (.is_desktop) (eq .chezmoi.os "windows") -}}
+Include ~/.ssh/1Password/config
+
+Host ghe
+    Hostname github.com
+{{ end }}
