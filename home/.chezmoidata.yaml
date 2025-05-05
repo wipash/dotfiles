@@ -65,8 +65,10 @@ kubectl_krew_plugins:
 
 fisher_plugins:
   - jorgebucaran/fisher
-  - jorgebucaran/nvm.fish
+
+fisher_plugins_remove:
   - z11i/github-copilot-cli.fish
+  - jorgebucaran/nvm.fish
 
 kubeconfig_onepassword_sources:
   - path: op://Homelab/Kubeconfig/notesPlain

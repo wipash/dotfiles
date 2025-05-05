@@ -11,6 +11,16 @@
 echo "🪝  Installing/updating fisher plugins: {{ .fisher_plugins | join " " }}"
 fisher install {{ .fisher_plugins | join " " }}
 
-fisher remove jorgebucaran/nvm.fish
+
+{{ if .fisher_plugins_remove }}
+set fisher_plugins (fisher list)
+for plugin in {{ .fisher_plugins_remove | join " " }}
+    if contains $plugin $fisher_plugins
+        echo "Removing plugin: $plugin"
+        fisher remove $plugin
+    end
+end
+{{ end }}
+
 
 {{ end -}}
