@@ -6,4 +6,14 @@ set -euo pipefail
 echo "👊  Configuring Podman for WSL2"
 sudo usermod --append --groups 10 $(whoami)
 podman system connection add --default podman-machine-default-root unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock
+
+echo "👊  Configuring WSL automount"
+WSL_CONF_BLOCK="[automount]\ncrossDistro = true"
+if ! grep -q "^\[automount\]" /etc/wsl.conf; then
+  echo "Appending automount configuration to /etc/wsl.conf"
+  echo -e "$WSL_CONF_BLOCK" | sudo tee -a /etc/wsl.conf > /dev/null
+else
+  echo "Automount configuration already present in /etc/wsl.conf"
+fi
+
 {{ end -}}
