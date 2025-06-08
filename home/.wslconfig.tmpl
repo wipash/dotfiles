@@ -1,0 +1,4 @@
+{{- if and (.is_desktop) (eq .chezmoi.os "windows") -}}
+[wsl2]
+kernelCommandLine = cgroup_no_v1=all
+{{ end }}
