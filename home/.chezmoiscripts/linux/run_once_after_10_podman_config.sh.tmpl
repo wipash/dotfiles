@@ -1,0 +1,9 @@
+{{- if .is_desktop -}}
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "👊  Configuring Podman for WSL2"
+sudo usermod --append --groups 10 $(whoami)
+podman system connection add --default podman-machine-default-root unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock
+{{ end -}}
