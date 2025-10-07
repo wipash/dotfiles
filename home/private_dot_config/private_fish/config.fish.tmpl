@@ -33,3 +33,7 @@ set -g fish_color_valid_path --underline
 
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
+
+set -gx DOCKER_HOST "unix:///run/podman/podman.sock"
+
+alias claude="$HOME/.claude/local/claude"
