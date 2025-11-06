@@ -34,8 +34,7 @@ brew_packages:
   - llm
   - uv
   - volta
-  - podman
-  - podman-compose
+
 
 uv_tools:
   - --python python3.12 aider-chat@latest

@@ -40,7 +40,7 @@ if test -d /usr/local/cuda/bin
     set -gx LD_LIBRARY_PATH /usr/local/cuda/lib64 $LD_LIBRARY_PATH
 end
 
-set -gx DOCKER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
-set -gx CONTAINER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
+# set -gx DOCKER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
+# set -gx CONTAINER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
 
 alias claude="$HOME/.claude/local/claude"
