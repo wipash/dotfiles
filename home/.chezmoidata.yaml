@@ -34,10 +34,11 @@ brew_packages:
   - llm
   - uv
   - volta
+  - just
 
 
 uv_tools:
-  - --python python3.12 aider-chat@latest
+  - prek
 
 winget_packages:
   - eza-community.eza

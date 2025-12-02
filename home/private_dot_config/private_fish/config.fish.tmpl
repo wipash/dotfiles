@@ -43,4 +43,7 @@ end
 # set -gx DOCKER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
 # set -gx CONTAINER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
 
+# Brew
+set -gx HOMEBREW_NO_ENV_HINTS 1
+
 alias claude="$HOME/.claude/local/claude"
