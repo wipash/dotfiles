@@ -1,3 +1,6 @@
+scan_timeout = 100
+command_timeout = 1000
+
 format = """
 [](color_orange)\
 $os\
@@ -93,8 +96,9 @@ format = '[$all_status$ahead_behind ]($style)'
 symbol = ""
 style = "fg:color_text bg:color_blue"
 format = '[ $symbol ($version) ]($style)'
+detect_extensions = []
 detect_files = ["package.json", ".node-version"]
-detect_folders = ["node_modules"]
+detect_folders = []
 
 [python]
 symbol = ""
