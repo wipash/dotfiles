@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-/mnt/c/users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe "$@"
+{{ if stat "/mnt/c/Users/sean/AppData/Local/Microsoft/WinGet/Links/op.exe" }}
+/mnt/c/Users/sean/AppData/Local/Microsoft/WinGet/Links/op.exe "$@"
+{{ else if stat "/mnt/c/Users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe" }}
+/mnt/c/Users/sean.mcgrath/AppData/Local/Microsoft/WinGet/Links/op.exe "$@"
+{{ else }}
+echo "1Password CLI not found"
+{{ end }}
