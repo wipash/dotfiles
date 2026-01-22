@@ -15,8 +15,23 @@ command -v brew >/dev/null 2>&1 || \
   sudo apt-get update && sudo apt-get install -y build-essential procps curl file git && \
   brew install gcc)
 
-command -v fish >/dev/null 2>&1 || \
-  (echo '🐟  Installing fish' && brew install fish)
+if ! command -v fish >/dev/null 2>&1; then
+  echo '🐟  Installing fish'
+  sudo add-apt-repository ppa:fish-shell/release-4 -y
+  sudo apt-get -y install fish
+fi
+
+# Ensure fish is in /etc/shells
+if ! grep -qx '/usr/bin/fish' /etc/shells; then
+  echo '🐟  Adding fish to /etc/shells'
+  echo '/usr/bin/fish' | sudo tee -a /etc/shells
+fi
+
+# Set fish as default shell
+if [ "$SHELL" != '/usr/bin/fish' ]; then
+  echo '🐟  Setting fish as default shell'
+  sudo chsh -s /usr/bin/fish "$USER"
+fi
 
 # Install chezmoi
 command -v chezmoi >/dev/null 2>&1 || \
