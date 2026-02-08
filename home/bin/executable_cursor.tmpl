@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
+args=("$@")
+[[ ${#args[@]} -eq 0 ]] && args=(".")
+
 {{ if stat "/mnt/c/Users/sean/AppData/Local/Programs/cursor/resources/app/bin/cursor" }}
-/mnt/c/Users/sean/AppData/Local/Programs/cursor/resources/app/bin/cursor "$@"
+/mnt/c/Users/sean/AppData/Local/Programs/cursor/resources/app/bin/cursor "${args[@]}"
 {{ else if stat "/mnt/c/Users/sean.mcgrath/AppData/Local/Programs/cursor/resources/app/bin/cursor" }}
-/mnt/c/Users/sean.mcgrath/AppData/Local/Programs/cursor/resources/app/bin/cursor "$@"
+/mnt/c/Users/sean.mcgrath/AppData/Local/Programs/cursor/resources/app/bin/cursor "${args[@]}"
 {{ else if stat "/mnt/c/Program Files/Cursor/resources/app/bin/cursor" }}
-/mnt/c/Program\ Files/Cursor/resources/app/bin/cursor "$@"
+/mnt/c/Program\ Files/Cursor/resources/app/bin/cursor "${args[@]}"
 {{ else }}
 echo "Cursor not found"
 {{ end }}

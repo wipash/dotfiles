@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+args=("$@")
+[[ ${#args[@]} -eq 0 ]] && args=(".")
+
 {{ if stat "/mnt/c/Users/sean/AppData/Local/Programs/Microsoft VS Code/bin/code" }}
-/mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code "$@"
+/mnt/c/Users/sean/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code "${args[@]}"
 {{ else if stat "/mnt/c/Program Files/Microsoft VS Code/bin/code" }}
-/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code "$@"
+/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code "${args[@]}"
 {{ else }}
 echo "VS Code not found"
 {{ end }}
