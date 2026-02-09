@@ -33,6 +33,7 @@ brew_packages:
   - uv
   - volta
   - just
+  - git-delta
 
 
 uv_tools:

@@ -1,0 +1,30 @@
+gui:
+  nerdFontsVersion: "3"
+
+git:
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+
+customCommands:
+  # Create worktree from current branch (when in worktrees view)
+  - key: "N"
+    context: "worktrees"
+    description: "Create new worktree from current branch"
+    prompts:
+      - type: "input"
+        title: "Create a new worktree from {{ .CheckedOutBranch.Name }} with what name?"
+        key: "Name"
+        initialValue: ""
+    command: "git worktree add ../{{ .Form.Name }} {{ .CheckedOutBranch.Name }} -b {{ .Form.Name }}"
+
+  # Create worktree from selected branch (when in branches view)
+  - key: "N"
+    context: "localBranches"
+    description: "Create new worktree from selected branch"
+    prompts:
+      - type: "input"
+        title: "Create a new worktree from {{ .SelectedLocalBranch.Name }} with what name?"
+        key: "Name"
+        initialValue: ""
+    command: "git worktree add ../{{ .Form.Name }} {{ .SelectedLocalBranch.Name }} -b {{ .Form.Name }}"
