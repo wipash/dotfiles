@@ -5,3 +5,4 @@ x-scheme-handler/http=wsl-browser.desktop
 x-scheme-handler/https=wsl-browser.desktop
 x-scheme-handler/about=wsl-browser.desktop
 x-scheme-handler/unknown=wsl-browser.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
