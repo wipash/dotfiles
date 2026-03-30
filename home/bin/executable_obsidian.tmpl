@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+{{ if stat "/mnt/c/Users/sean/AppData/Local/Obsidian/Obsidian.com" }}
+/mnt/c/Users/sean/AppData/Local/Obsidian/Obsidian.com "$@"
+{{ else if stat "/mnt/c/Users/sean.mcgrath/AppData/Local/Obsidian/Obsidian.com" }}
+/mnt/c/Users/sean.mcgrath/AppData/Local/Obsidian/Obsidian.com "$@"
+{{ else }}
+echo "Obsidian CLI not found"
+{{ end }}
