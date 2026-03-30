@@ -29,11 +29,30 @@ brew_packages:
   - sops
   - sqlite
   - talhelper
+  - siderolabs/tap/talosctl
   - llm
   - uv
   - volta
   - just
   - git-delta
+  - nvim
+  - difftastic
+  - terror/tap/just-lsp
+  - crane
+  - stern
+  - minijinja-cli
+  - mise
+  - oven-sh/bun/bun
+  - lazygit
+  - ripgrep
+  - lazydocker
+  - jq
+  - yq
+  - hashicorp/tap/terraform
+  - skopeo
+  - doggo
+  - Azure/kubelogin/kubelogin
+  - shellcheck
 
 
 uv_tools:
@@ -63,6 +82,7 @@ winget_packages:
 
 kubectl_krew_plugins:
   - explore
+  - cnpg
 
 fisher_plugins:
   - jorgebucaran/fisher
