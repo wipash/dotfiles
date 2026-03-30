@@ -3,26 +3,69 @@
   name = {{ .name }}
 
 [url "git@github.com-holmesgroup:HolmesGroup/"]
-    insteadOf = https://github.com/HolmesGroup/
-    insteadOf = git@github.com:HolmesGroup/
+  insteadOf = https://github.com/HolmesGroup/
+  insteadOf = git@github.com:HolmesGroup/
 
 [url "git@github.com:wipash/"]
-    insteadOf = https://github.com/wipash/
-    insteadOf = git@github.com:wipash/
+  insteadOf = https://github.com/wipash/
+  insteadOf = git@github.com:wipash/
 
+[init]
+  defaultBranch = main
+
+[commit]
+  verbose = true
 
 [core]
   sshCommand = /mnt/c/Windows/System32/OpenSSH/ssh.exe
+  pager = delta --paging=always
+  autocrlf = false
+  excludesFile = ~/.config/git/ignore_global
+
+[diff]
+  algorithm = histogram
+  tool = difftastic
 
 [filter "lfs"]
-       clean = git-lfs clean -- %f
-       smudge = git-lfs smudge -- %f
-       process = git-lfs filter-process
-       required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[push]
+  autoSetupRemote = true
 
 [pull]
-       rebase = true
+  rebase = true
 
 [delta]
   file-style = omit
   hunk-header-style = file line-number syntax
+
+[merge]
+  conflictStyle = zdiff3
+
+[rerere]
+  enabled = true
+
+[help]
+  autocorrect = 1
+
+[transfer]
+        fsckobjects = true
+[fetch]
+        fsckobjects = true
+        prune = true
+        pruneTags = true
+[receive]
+        fsckObjects = true
+
+[alias]
+  st = status
+  sw = git switch
+  new = git switch -c
+  ca = !git add -A && git commit -m
+  br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  lg = log --graph --pretty=format:'%C(auto)%h%d %s %C(black)%C(bold blue)<%an>%Creset' --all
+
+  save = !git add -A && git commit -m 'chore: commit save point'
