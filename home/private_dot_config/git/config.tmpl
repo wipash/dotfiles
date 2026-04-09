@@ -45,9 +45,6 @@
 [merge]
   conflictStyle = zdiff3
 
-[rerere]
-  enabled = true
-
 [help]
   autocorrect = 1
 
@@ -62,8 +59,8 @@
 
 [alias]
   st = status
-  sw = git switch
-  new = git switch -c
+  sw = switch
+  new = switch -c
   ca = !git add -A && git commit -m
   br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
   lg = log --graph --pretty=format:'%C(auto)%h%d %s %C(black)%C(bold blue)<%an>%Creset' --all
