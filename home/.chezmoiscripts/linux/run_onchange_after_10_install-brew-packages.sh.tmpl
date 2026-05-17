@@ -3,16 +3,37 @@
 
 set -euo pipefail
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ENV_HINTS=1
+
 # Install homebrew
 {{ if not (stat "/home/linuxbrew/.linuxbrew/bin/brew") }}
   echo "🍺  Installing Homebrew"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 {{ end }}
 
-echo "🍺 Tapping kegs {{ .brew_kegs | join " " }}"
-brew tap {{ .brew_kegs | join " " }}
+packages=({{ .brew_packages | join " " }})
+kegs=({{ .brew_kegs | join " " }})
 
-echo "👊  Installing/updating brew packages: {{ .brew_packages | join " " }}"
-brew install {{ .brew_packages | join " " }}
+# Pre-tap every tap referenced by `brew_kegs` and `brew_packages`. Letting
+# `brew install` auto-tap mid-run consistently triggers "Error: Broken pipe"
+# right after each tap completes (the install-after-auto-tap transition is
+# fragile when brew's stdout is a non-tty pipe).
+declare -A seen_taps
+for entry in "${packages[@]}" "${kegs[@]}"; do
+  case "$entry" in
+    */*/*) tap="${entry%/*}" ;;   # user/tap/formula -> user/tap
+    */*)   tap="$entry" ;;        # user/tap        -> user/tap
+    *)     continue ;;            # bare formula, no tap
+  esac
+  if [ -z "${seen_taps[$tap]:-}" ]; then
+    seen_taps[$tap]=1
+    echo "🍺 Ensuring tap: $tap"
+    brew tap "$tap"
+  fi
+done
+
+echo "👊  Installing/updating brew packages: ${packages[*]}"
+brew install "${packages[@]}"
 
 {{ end -}}

@@ -15,7 +15,7 @@ config_info: |
   {{-   end -}}
   {{- end -}}
 
-  {{- $is_desktop := or ($is_wsl) (eq .chezmoi.os "windows") (eq (env "IS_DESKTOP") "true") -}}
+  {{- $is_desktop := or ($is_wsl) (eq .chezmoi.os "windows") (eq (env "IS_DESKTOP") "true") (eq .chezmoi.osRelease.id "bazzite") -}}
 
   {{- $is_server := not $is_desktop -}}
   {{- $workingTree := .chezmoi.workingTree -}}
@@ -57,8 +57,10 @@ edit:
   args: ["--wait"]
 
 onePassword:
-{{- if eq .chezmoi.os "linux" }}
+{{- if $is_wsl }}
   command: /mnt/c/users/{{- $username -}}/AppData/Local/Microsoft/WinGet/Links/op.exe
-{{- else }}
+{{- else if eq .chezmoi.os "windows" }}
   command: op.exe
+{{- else }}
+  command: op
 {{- end }}

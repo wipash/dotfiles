@@ -5,7 +5,6 @@ brew_kegs:
   - robusta-dev/homebrew-krr
 
 brew_packages:
-  - gcc
   - starship
   - age
   - atuin
@@ -53,6 +52,7 @@ brew_packages:
   - doggo
   - Azure/kubelogin/kubelogin
   - shellcheck
+  - 1password-cli
 
 
 uv_tools:

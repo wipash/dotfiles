@@ -32,3 +32,15 @@ AppData
 .gitconfig
 .npmrc
 {{ end }}
+
+{{ if not .is_wsl }}
+bin/ssh
+bin/ssh-add
+bin/explorer
+bin/wsl-browser
+bin/code
+bin/cursor
+bin/obsidian
+bin/op
+.local/share/applications/wsl-browser.desktop
+{{ end }}

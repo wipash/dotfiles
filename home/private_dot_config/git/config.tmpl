@@ -17,7 +17,9 @@
   verbose = true
 
 [core]
+{{- if .is_wsl }}
   sshCommand = /mnt/c/Windows/System32/OpenSSH/ssh.exe
+{{- end }}
   pager = delta --paging=always
   autocrlf = false
   excludesFile = ~/.config/git/ignore_global
