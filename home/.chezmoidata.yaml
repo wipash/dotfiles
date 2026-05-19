@@ -53,6 +53,13 @@ brew_packages:
   - Azure/kubelogin/kubelogin
   - shellcheck
   - 1password-cli
+  - kubeconform
+  - fd
+  - btop
+  - git-revise
+  - git-absorb
+  - zellij
+  - hmans/beans/beans
 
 
 uv_tools:
