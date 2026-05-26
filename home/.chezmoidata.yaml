@@ -60,7 +60,6 @@ brew_packages:
   - git-absorb
   - zellij
   - hmans/beans/beans
-  - mmdc
   - fd
 
 
