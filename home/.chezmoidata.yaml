@@ -61,6 +61,7 @@ brew_packages:
   - zellij
   - hmans/beans/beans
   - fd
+  - dive
 
 
 uv_tools:
