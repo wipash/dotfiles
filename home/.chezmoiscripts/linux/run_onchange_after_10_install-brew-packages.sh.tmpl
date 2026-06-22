@@ -19,6 +19,12 @@ kegs=({{ .brew_kegs | join " " }})
 # `brew install` auto-tap mid-run consistently triggers "Error: Broken pipe"
 # right after each tap completes (the install-after-auto-tap transition is
 # fragile when brew's stdout is a non-tty pipe).
+#
+# Homebrew 6 also requires non-official taps to be explicitly trusted before it
+# will load their formulae/casks (otherwise they are silently ignored). Trust
+# each tap right after tapping it; brew normalises the name (lower-cases it and
+# strips the `homebrew-` prefix, e.g. robusta-dev/homebrew-krr -> robusta-dev/krr)
+# and the command is idempotent.
 declare -A seen_taps
 for entry in "${packages[@]}" "${kegs[@]}"; do
   case "$entry" in
@@ -30,6 +36,8 @@ for entry in "${packages[@]}" "${kegs[@]}"; do
     seen_taps[$tap]=1
     echo "🍺 Ensuring tap: $tap"
     brew tap "$tap"
+    echo "🤝 Trusting tap: $tap"
+    brew trust --tap "$tap"
   fi
 done
 
