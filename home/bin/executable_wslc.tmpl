@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+args=("$@")
+[[ ${#args[@]} -eq 0 ]] && args=(".")
+
+/mnt/c/Program\ Files/WSL/wslc.exe "${args[@]}"
