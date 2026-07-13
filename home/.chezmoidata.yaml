@@ -62,6 +62,9 @@ brew_packages:
   - hmans/beans/beans
   - fd
   - dive
+  - glow
+  - worktrunk
+  - herdr
 
 
 uv_tools:
