@@ -144,7 +144,7 @@ autostart = true
 ## Pinned explicitly: atuin otherwise derives this from XDG_RUNTIME_DIR, which
 ## WSLg sets in local WSL sessions but sshd sessions do not get. That mismatch
 ## made every command in an SSH session wait ~5s for a daemon it couldn't find.
-socket_path = "/home/sean/.local/share/atuin/atuin.sock"
+socket_path = "{{ joinPath .chezmoi.homeDir ".local/share/atuin/atuin.sock" }}"
 
 
 ## Defaults to "emacs".  This specifies the keymap on the startup of `atuin
