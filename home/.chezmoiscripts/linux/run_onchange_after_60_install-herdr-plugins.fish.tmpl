@@ -1,0 +1,11 @@
+{{- if and (lookPath "herdr") (.is_desktop) -}}
+#!/usr/bin/env fish
+
+echo "Installing/updating herdr plugins: {{ .herdr_plugins | join " " }}"
+{{ range .herdr_plugins -}}
+  echo Installing herdr plugin '{{ . }}'
+  herdr plugin install {{ . }}
+{{ end }}
+herdr server reload-config
+
+{{ end -}}

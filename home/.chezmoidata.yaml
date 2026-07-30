@@ -66,6 +66,8 @@ brew_packages:
   - worktrunk
   - herdr
 
+herdr_plugins:
+  - smarzban/herdr-file-viewer
 
 uv_tools:
   - prek
