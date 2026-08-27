@@ -23,3 +23,8 @@ key = "prefix+shift+f"
 type = "shell"
 command = "herdr plugin action invoke open-file-viewer-tab --plugin herdr-file-viewer"
 ##
+
+[ui]
+show_agent_labels_on_pane_borders = true
+status_indicators = "symbols"
+
