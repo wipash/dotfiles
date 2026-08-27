@@ -1,14 +1,18 @@
 os:
   editPreset: "vscode"
-
+  openLink: "xdg-open {{link}}"
 gui:
   nerdFontsVersion: "3"
-
+  theme:
+    selectedLineBgColor:
+      - '#2c3a52'
+notARepository: 'quit'
 git:
-  pagers:
+  autoForwardBranches: allBranches
+  ignoreWhitespaceInDiffView: true
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
-
+      command: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 customCommands:
   # Create worktree from current branch (when in worktrees view)
   - key: "N"
@@ -20,7 +24,6 @@ customCommands:
         key: "Name"
         initialValue: ""
     command: "git worktree add ../{{ .Form.Name }} {{ .CheckedOutBranch.Name }} -b {{ .Form.Name }}"
-
   # Create worktree from selected branch (when in branches view)
   - key: "N"
     context: "localBranches"
