@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Add new update commands here; each entry runs independently.
+updates=(
+  "omp update"
+  "claude update"
+  "codex update"
+  "no-mistakes update"
+  "uv tool upgrade --all"
+  "npm update -g"
+  "brew update && brew upgrade -y"
+)
+
+# Only run with -f/--full.
+full_updates=(
+  "sudo apt-get update && sudo apt-get upgrade -y"
+)
+
+full=0
+for arg in "$@"; do
+  case "$arg" in
+    -f | --full) full=1 ;;
+    *)
+      echo "usage: upd [-f|--full]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if ((full)); then
+  updates+=("${full_updates[@]}")
+fi
+
+failed=()
+for cmd in "${updates[@]}"; do
+  printf '\n==> %s\n' "$cmd"
+  if ! eval "$cmd"; then
+    printf '!!! failed: %s\n' "$cmd" >&2
+    failed+=("$cmd")
+  fi
+done
+
+if ((${#failed[@]})); then
+  printf '\n%d update(s) failed:\n' "${#failed[@]}" >&2
+  printf '  - %s\n' "${failed[@]}" >&2
+  exit 1
+fi
