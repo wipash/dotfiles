@@ -6,6 +6,10 @@ echo "Installing/updating herdr plugins: {{ .herdr_plugins | join " " }}"
   echo Installing herdr plugin '{{ . }}'
   herdr plugin install {{ . }}
 {{ end }}
-herdr server reload-config
+if herdr server reload-config 2>/dev/null
+  echo "Reloaded herdr server config"
+else
+  echo "herdr server not running; skipping config reload"
+end
 
 {{ end -}}

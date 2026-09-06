@@ -2,7 +2,6 @@ os:
   editPreset: "vscode"
   openLink: "xdg-open {{link}}"
 gui:
-  nerdFontsVersion: "3"
   theme:
     selectedLineBgColor:
       - '#2c3a52'
