@@ -3,6 +3,7 @@ fish_add_path -ga $HOME/.dotnet
 fish_add_path -ga $HOME/.dotnet/tools
 fish_add_path -ga $HOME/.poetry/bin
 fish_add_path -ga $HOME/.fzf/bin
+fish_add_path -Pa $HOME/.krew/bin
 
 fish_add_path -ga $HOME/.local/bin
 
