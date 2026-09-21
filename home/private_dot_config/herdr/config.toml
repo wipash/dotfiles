@@ -15,3 +15,10 @@ next_workspace = "prefix+right"
 [ui]
 show_agent_labels_on_pane_borders = true
 status_indicators = "symbols"
+tab_bar_right = [
+    { type = "zoom" },
+    { type = "text", text = "▣ HOST" },
+    { type = "hostname" },
+]
+tab_bar_right_separator = " · "
+window_title = "[{hostname}] {workspace} / {tab}"
