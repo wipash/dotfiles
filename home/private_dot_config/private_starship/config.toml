@@ -5,6 +5,7 @@ format = """
 [](color_orange)\
 $os\
 $username\
+$hostname\
 [](bg:color_yellow fg:color_orange)\
 $directory\
 [](fg:color_yellow bg:color_aqua)\
@@ -47,11 +48,15 @@ color_text = '#ffffff'
 show_always = true
 style_user = "bg:color_orange fg:color_fg0"
 style_root = "bg:color_orange fg:color_fg0"
-format = '[$user ]($style)'
+format = '[$user]($style)'
 disabled = false
 
 [hostname]
 ssh_only = false
+trim_at = ""
+ssh_symbol = '[](fg:color_red bg:color_orange)[ ↗ SSH ](bold fg:color_text bg:color_red)[](fg:color_red bg:color_orange)[ ](bg:color_orange)'
+style = "bg:color_orange fg:color_fg0"
+format = '[@$hostname ]($style)$ssh_symbol'
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
