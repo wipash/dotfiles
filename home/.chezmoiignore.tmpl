@@ -34,8 +34,9 @@ AppData
 {{ end }}
 
 {{ if not .is_wsl }}
-bin/ssh
-bin/ssh-add
+.ssh/config
+.ssh/github-personal.pub
+.ssh/github-holmesgroup.pub
 bin/explorer
 bin/wsl-browser
 bin/code

@@ -1,0 +1,24 @@
+{{- if .is_wsl -}}
+#!/bin/sh
+set -eu
+
+agent="$HOME/bin/wsl2-ssh-agent"
+if [ -x "$agent" ]; then
+    exit 0
+fi
+
+{{ if eq .chezmoi.arch "amd64" -}}
+asset=wsl2-ssh-agent
+{{ else if eq .chezmoi.arch "arm64" -}}
+asset=wsl2-ssh-agent-arm64
+{{ else -}}
+echo "Unsupported wsl2-ssh-agent architecture: {{ .chezmoi.arch }}" >&2
+exit 1
+{{ end }}
+mkdir -p "$HOME/bin"
+tmp=$(mktemp "$agent.XXXXXX")
+trap 'rm -f "$tmp"' EXIT HUP INT TERM
+curl -fSL "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/$asset" -o "$tmp"
+chmod 755 "$tmp"
+mv "$tmp" "$agent"
+{{ end -}}

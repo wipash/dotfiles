@@ -1,3 +1,9 @@
+{{ if .is_wsl -}}
+if not set -q SSH_AUTH_SOCK
+    "$HOME/bin/wsl2-ssh-agent" -format fish | source
+end
+
+{{ end -}}
 # Configure Jump
 status --is-interactive; and source (jump shell fish | psub)
 

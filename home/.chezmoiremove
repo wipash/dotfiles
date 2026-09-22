@@ -13,6 +13,11 @@
 
 {{ end }}
 
+{{ if .is_wsl }}
+bin/ssh
+bin/ssh-add
+{{ end }}
+
 {{ if eq .chezmoi.os "windows" }}
 
 # Windows powershell profile cleanup

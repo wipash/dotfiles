@@ -1,0 +1,11 @@
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-personal.pub
+    IdentitiesOnly yes
+
+Host github.com-holmesgroup ghe
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github-holmesgroup.pub
+    IdentitiesOnly yes
