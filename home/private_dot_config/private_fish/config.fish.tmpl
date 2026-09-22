@@ -1,5 +1,5 @@
 {{ if .is_wsl -}}
-if not set -q SSH_AUTH_SOCK
+if not set -q SSH_AUTH_SOCK; or not test -S "$SSH_AUTH_SOCK"
     "$HOME/bin/wsl2-ssh-agent" -format fish | source
 end
 
