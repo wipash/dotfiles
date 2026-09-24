@@ -9,5 +9,7 @@ fish_add_path -ga $HOME/.local/bin
 
 fish_add_path -ga $HOME/.local/share/aquaproj-aqua/bin
 fish_add_path -ga /home/linuxbrew/.linuxbrew/opt/fzf/bin
+{{ if .is_wsl -}}
 fish_add_path -ga "/mnt/c/Program Files/Docker/Docker/resources/bin"
+{{ end -}}
 fish_add_path -ga $HOME/bin

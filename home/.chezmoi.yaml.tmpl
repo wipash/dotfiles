@@ -9,7 +9,7 @@ config_info: |
   {{- $opemail := promptStringOnce . "opemail" "1Password email" -}}
 
   {{- $is_wsl := false -}}
-  {{- if .chezmoi.kernel -}}
+  {{- if and (eq .chezmoi.os "linux") .chezmoi.kernel -}}
   {{-   if hasKey .chezmoi.kernel "osrelease" -}}
   {{-     $is_wsl = (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
   {{-   end -}}
@@ -31,12 +31,14 @@ config_info: |
   {{ "" }}
   Generated for user={{ $username }}, hostname={{ .chezmoi.hostname }}
 
+{{ if or $is_wsl (eq .chezmoi.os "windows") -}}
 interpreters:
   ps1:
     # Prefer PowerShell Core over PowerShell Desktop
     # https://github.com/PowerShell/PowerShell/issues/8635#issuecomment-454028787
     command: '{{ if env "CHEZMOI_PS1_COMMAND" }}{{ env "CHEZMOI_PS1_COMMAND" }}{{ else if lookPath "pwsh.exe" }}pwsh.exe{{ else }}powershell.exe{{ end }}'
     args: ["-NoLogo", "-NoProfile"]
+{{ end }}
 
 data:
   is_wsl: {{ $is_wsl }}

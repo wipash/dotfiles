@@ -1,0 +1,30 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- $defaults := dict "x-scheme-handler/claude-cli" "claude-code-url-handler.desktop" -}}
+{{- if .is_wsl -}}
+{{- range list "text/html" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/about" "x-scheme-handler/unknown" -}}
+{{- $_ := set $defaults . "wsl-browser.desktop" -}}
+{{- end -}}
+{{- end -}}
+{{- $inDefaults := false -}}
+{{- $foundDefaults := false -}}
+{{- range splitList "\n" (.chezmoi.stdin | trimSuffix "\n") -}}
+{{- $line := trim . -}}
+{{- if hasPrefix "[" $line -}}
+{{- $inDefaults = eq $line "[Default Applications]" -}}
+{{- end -}}
+{{- if eq $line "[Default Applications]" -}}
+{{- $foundDefaults = true -}}
+{{ printf "%s\n" . }}
+{{- range $key, $value := $defaults -}}
+{{ printf "%s=%s\n" $key $value }}
+{{- end -}}
+{{- else if not (and $inDefaults (hasKey $defaults (index (splitList "=" $line) 0 | trim))) -}}
+{{ printf "%s\n" . }}
+{{- end -}}
+{{- end -}}
+{{- if not $foundDefaults -}}
+{{ printf "[Default Applications]\n" }}
+{{- range $key, $value := $defaults -}}
+{{ printf "%s=%s\n" $key $value }}
+{{- end -}}
+{{- end -}}

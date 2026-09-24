@@ -27,12 +27,10 @@ if test -d /usr/local/cuda/lib64
     or set -gx LD_LIBRARY_PATH /usr/local/cuda/lib64 $LD_LIBRARY_PATH
 end
 
-# set -gx DOCKER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
-# set -gx CONTAINER_HOST "unix:///mnt/wsl/podman-sockets/podman-machine-default/podman-root.sock"
-
 # Brew
 set -gx HOMEBREW_NO_ENV_HINTS 1
 
+{{ if .is_wsl -}}
 # set path for Windows Terminal - use to open new tab in current dir
 # with Duplicate Tab, or ctrl+shift+d
 function storePathForWindowsTerminal --on-variable PWD
@@ -40,3 +38,4 @@ function storePathForWindowsTerminal --on-variable PWD
       printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
     end
 end
+{{ end -}}

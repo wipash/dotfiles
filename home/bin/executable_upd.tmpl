@@ -13,7 +13,10 @@ updates=(
 
 # Only run with -f/--full.
 full_updates=(
+{{- $distros := printf "%s %s" (.chezmoi.osRelease.id | default "") (.chezmoi.osRelease.idLike | default "") | splitList " " }}
+{{- if or (has "debian" $distros) (has "ubuntu" $distros) }}
   "sudo apt-get update && sudo apt-get upgrade -y"
+{{- end }}
 )
 
 full=0
