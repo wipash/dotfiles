@@ -4,9 +4,11 @@ if [ -d "$HOME/.linuxbrew" ]
     set brew "$HOME/.linuxbrew/bin/brew"
 end
 
-if [ -f "$brew" ]
-    eval (eval "$brew" shellenv)
+if not test -x "$brew"
+    return
 end
+
+eval (eval "$brew" shellenv)
 if test -d (brew --prefix)"/share/fish/completions"
     set -gx fish_complete_path $fish_complete_path (brew --prefix)/share/fish/completions
 end

@@ -5,7 +5,9 @@ end
 
 {{ end -}}
 # Configure Jump
-status --is-interactive; and source (jump shell fish | psub)
+if status is-interactive; and command -q jump
+    source (jump shell fish | psub)
+end
 
 set -g theme_display_vagrant no
 set -g theme_display_ruby no

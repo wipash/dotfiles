@@ -1,3 +1,9 @@
+# Tailscale SSH can omit XDG_RUNTIME_DIR even when the user bus exists.
+# Use the active systemd user runtime directory without overriding a login's value.
+if not set -q XDG_RUNTIME_DIR; and test -S /run/user/(id -u)/bus
+    set -gx XDG_RUNTIME_DIR /run/user/(id -u)
+end
+
 # WSLg sets XDG_RUNTIME_DIR for local WSL sessions, but sshd-spawned sessions
 # don't get it: there's no pam_systemd here (systemd=false in /etc/wsl.conf) and
 # no WSLg environment. Tools that derive paths from it then look in the wrong
