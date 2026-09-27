@@ -50,3 +50,8 @@ bin/op
 .config/fish/conf.d/00-xdg-runtime-dir.fish
 .local/share/applications/wsl-browser.desktop
 {{ end }}
+
+{{ if or (ne .chezmoi.os "linux") .is_wsl (ne .chezmoi.hostname "bazzite") }}
+.ssh/rc
+.config/fish/conf.d/50-forwarded-agent.fish
+{{ end }}
