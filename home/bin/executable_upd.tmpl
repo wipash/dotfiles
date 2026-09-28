@@ -7,6 +7,7 @@ updates=(
   "codex update"
   "no-mistakes update"
   "uv tool upgrade --all"
+  "volta install npm@latest"
   "npm update -g"
   "brew update && brew upgrade -y"
 )
@@ -37,6 +38,14 @@ fi
 failed=()
 for cmd in "${updates[@]}"; do
   printf '\n==> %s\n' "$cmd"
+  if [[ "$cmd" == "codex update" ]]; then
+    installed_version=$(codex --version | awk '{print $2}')
+    latest_version=$(npm view @openai/codex version 2>/dev/null || true)
+    if [[ -n "$latest_version" && "$installed_version" == "$latest_version" ]]; then
+      printf 'Codex CLI %s is up to date\n' "$installed_version"
+      continue
+    fi
+  fi
   if ! eval "$cmd"; then
     printf '!!! failed: %s\n' "$cmd" >&2
     failed+=("$cmd")
