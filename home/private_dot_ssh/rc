@@ -1,4 +1,0 @@
-if [ -n "${SSH_AUTH_SOCK:-}" ] && [ -S "$SSH_AUTH_SOCK" ]; then
-    mkdir -p -m 700 "$HOME/.ssh/agent" &&
-        ln -sfn "$SSH_AUTH_SOCK" "$HOME/.ssh/agent/forwarded"
-fi
