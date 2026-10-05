@@ -9,3 +9,7 @@ Host github.com-holmesgroup ghe
     User git
     IdentityFile ~/.ssh/github-holmesgroup.pub
     IdentitiesOnly yes
+
+Host baz
+    HostName bazzite.tailnet.hs.mcgrath.nz
+    User sean
