@@ -10,7 +10,7 @@ These are common instructions for Sean's agents across all scenarios.
 - When end-to-end testing a product, be picky about the UI you see and be obsessed with pixel perfection. If something clearly looks off, even if it is not directly related to - what you are doing, try to get it fixed along
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 - Questions are read-only. When I ask you something I just want an answer, I'm not insinuating that you should make a change.
-
+- Don't make updates to READMEs unless specifically asked into
 
 ## Writing Guidelines
 
@@ -25,9 +25,14 @@ These apply to every written artifact you create (plans, docs, prose, code comme
 - Include context on things, items, sections, points, etc., referenced from other documents or messages, don't assume I've read everything.
 - Do not fold negation into words like "no", "nowhere", "none", or "nothing" when a plain verb negation exists ("no-negation"). Write "is not named anywhere", not "is named nowhere". Write "does not match any seeds", not "matches no seed". "doesn't share a lock with", not "shares no lock with".
 - Do not bolt a verbless negative tag onto a sentence for emphasis ("X or Y, never both", "one owner, no exceptions", "fast, not correct"). Fold the meaning into the sentence itself. Write "a given input can match either a file or a document", not "a given input can match a file or a document, never both".
+- Don't start a relative clause with a bare name or pronoun. Write "the merge commit that was built by GitHub", not "the merge commit GitHub built", and "Nobody asked for Y", not "Y nobody asked for".
 - Don't attribute agency to things for grandiosity: text doesn't 'claim' something is smaller, it makes it look smaller.
 - Write like a person who has been wrong before: say what you have to say and stop, no greetings, announcements of intent, or document-structure signposts.
 - Write like a competent engineer in plain, direct English: no metaphors, preambles, hype, reveals, or historical remarks that only warn about past states.
+
+## GitHub
+
+- Put screenshots and videos in PRs, issues and comments with `gh`'s `--attach` flag (`gh pr create`, `gh pr edit`, `gh pr comment`, `gh issue create`, `gh issue comment`). Reference the file in the body as `![alt](./shot.png)` and pass `--attach ./shot.png`; gh uploads it and rewrites the reference to the uploaded copy.
 
 ## Code comments
 
