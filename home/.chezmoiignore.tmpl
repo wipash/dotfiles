@@ -1,5 +1,10 @@
 README.md
 
+{{/* create_AGENTS.md only seeds a missing file. Each machine then points ~/AGENTS.md at its own Home Repo checkout, and create_ alone would replace that symlink with a regular file. */}}
+{{ if lstat (joinPath .chezmoi.homeDir "AGENTS.md") }}
+AGENTS.md
+{{ end }}
+
 {{ if .is_server }}
 .config/git
 {{ end }}
