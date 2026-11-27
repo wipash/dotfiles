@@ -1,8 +1,7 @@
-README.md
 
-{{/* create_AGENTS.md only seeds a missing file. Each machine then points ~/AGENTS.md at its own Home Repo checkout, and create_ alone would replace that symlink with a regular file. */}}
-{{ if lstat (joinPath .chezmoi.homeDir "AGENTS.md") }}
-AGENTS.md
+{{/* create_AGENTS.md only seeds a missing file. Each machine then points ~/.agents/AGENTS.md at its own Home Repo checkout, and create_ alone would replace that symlink with a regular file. The link lives in ~/.agents because Claude Code loads every AGENTS.md in the directories above a repo, which would load one in ~ a second time. A machine that still has the link at ~/AGENTS.md skips the seed too, because the move-agents-link script moves that link after this file is read. */}}
+{{ if or (lstat (joinPath .chezmoi.homeDir ".agents" "AGENTS.md")) (lstat (joinPath .chezmoi.homeDir "AGENTS.md")) }}
+.agents/AGENTS.md
 {{ end }}
 
 {{ if .is_server }}
